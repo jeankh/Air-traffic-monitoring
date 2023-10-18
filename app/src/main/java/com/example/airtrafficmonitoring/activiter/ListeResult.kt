@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.airtrafficmonitoring.R
 
-class liste_result : AppCompatActivity() {
+class ListeResult : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_liste_result)
