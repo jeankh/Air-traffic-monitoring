@@ -2,7 +2,7 @@ package com.example.airtrafficmonitoring
 
 /**
  * Created by sergio on 07/11/2021
- * All rights reserved GoodBarber
+ * All rights reserved JeanBarber
  */
 data class Airport(
     val code: String,
@@ -26,5 +26,9 @@ data class Airport(
 ) {
     fun getFormattedName(): String {
         return "$code $city ($country)"
+    }
+
+    override fun toString(): String {
+        return getFormattedName()
     }
 }
