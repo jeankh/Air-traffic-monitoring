@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".FlightApplication"
         android:allowBackup="true"
@@ -14,10 +16,13 @@
         android:theme="@style/Theme.AirTrafficMonitoring"
         tools:targetApi="31">
         <activity
-            android:name=".activiter.Home"
+            android:name=".activiter.PlusDetail"
             android:exported="false" />
         <activity
-            android:name=".activiter.InfoMap"
+            android:name=".activiter.Detail3jour"
+            android:exported="false" />
+        <activity
+            android:name=".activiter.Home"
             android:exported="false" />
         <activity
             android:name=".activiter.ListeResult"
@@ -26,7 +31,7 @@
             android:name=".activiter.Principal"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activiter.InfoMap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
