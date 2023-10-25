@@ -62,7 +62,7 @@
                     android:id="@+id/detailplus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mon Bouton" />
+                    android:text="plus de details" />
 
                 <Button
                     android:id="@+id/detail3jours"

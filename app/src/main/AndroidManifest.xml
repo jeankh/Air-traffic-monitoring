@@ -26,6 +26,12 @@
             android:name=".activiter.Principal"
             android:exported="false" />
         <activity
+            android:name=".activiter.PlusDetail"
+            android:exported="false" />
+        <activity
+            android:name=".activiter.Detail3jour"
+            android:exported="false" />
+        <activity
             android:name=".activiter.Home"
             android:exported="true">
             <intent-filter>

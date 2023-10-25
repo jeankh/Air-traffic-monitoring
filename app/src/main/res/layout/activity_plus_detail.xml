@@ -7,4 +7,194 @@
     android:layout_height="match_parent"
     tools:context=".activiter.PlusDetail">
 
+
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+  <LinearLayout
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:padding="16dp"
+      tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/icanlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toto"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/apiResponseTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="titi" />
+//----------------------------------
+    <TextView
+        android:id="@+id/firstlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/firstSeen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+    //------------------------------------
+    <TextView
+        android:id="@+id/estdapartlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/estDepartureAirport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+//----------------------------------
+    <TextView
+        android:id="@+id/lastlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/lastSeen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+
+    //-------------------------------------------
+    <TextView
+        android:id="@+id/estarrivallabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/estArrivalAirport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+//-------------------------------------------------
+    <TextView
+        android:id="@+id/callsignlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/callsign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+    //----------------------------
+    <TextView
+        android:id="@+id/estdepartdistancelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/estDepartureAirportHorizDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+
+    //----------------------------------
+    <TextView
+        android:id="@+id/estDepartureAirportVertDistancelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/estDepartureAirportVertDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+    //------------------------------
+    <TextView
+        android:id="@+id/estArrivalAirportHorizDistancelabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/estArrivalAirportHorizDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+    //------------------------------
+
+    <TextView
+        android:id="@+id/estArrivalAirportVertDistancelabel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Label:"
+          android:textSize="18sp" />
+
+      <TextView
+          android:id="@+id/estArrivalAirportVertDistance"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:hint="Enter text here"
+          android:text="Label:" />
+
+    //-----------------------------------
+    <TextView
+        android:id="@+id/departureAirportCandidatesCountlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/departureAirportCandidatesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:" />
+    //-------------------------------------------
+    <TextView
+        android:id="@+id/arrivalAirportCandidatesCountlabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Label:"
+        android:textSize="18sp" />
+
+      <TextView
+        android:id="@+id/arrivalAirportCandidatesCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter text here"
+        android:text="Label:"/>
+  </LinearLayout>
+    </ScrollView>
   </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- res/layout/flight_item.xml -->
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/departureAirportTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Départ : "
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:id="@+id/arrivalAirportTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Arrivée : "
+            android:textSize="18sp"/>
+
+
+        <TextView
+            android:id="@+id/departureDateTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date de départ : " />
+
+        <TextView
+            android:id="@+id/arrivalDateTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date d'arrivée : " />
+
+        <TextView
+            android:id="@+id/flightDurationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temps de vol : " />
+
+        <TextView
+            android:id="@+id/flightNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom du vol : " />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
