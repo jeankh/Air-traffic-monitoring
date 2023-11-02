@@ -19,6 +19,7 @@ import com.example.airtrafficmonitoring.R
 import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.json.JSONArray
 import org.json.JSONObject
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
@@ -40,6 +41,8 @@ class InfoMap : AppCompatActivity() {
     private lateinit var detailplus: Button
     private lateinit var detail3jours: Button
 
+    lateinit var numavion33: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_map)
@@ -52,9 +55,8 @@ class InfoMap : AppCompatActivity() {
         // Set the initial map center and zoom level
         mapView.controller.setZoom(5.0)
         mapView.controller.setCenter(GeoPoint(48.8566, 2.3522)) // London coordinates
-
-        // TODO recupee identifiant de l'avaion sont depart et arriver
-        /**var intent: Intent? = getIntent()
+        /**
+         var intent: Intent? = getIntent()
         var numavion = intent!!.getStringExtra("icao24")
         var aerodep= intent!!.getStringExtra("estDepartureAirport")
         var aeroariv = intent!!.getStringExtra("estArrivalAirport")
@@ -63,23 +65,17 @@ class InfoMap : AppCompatActivity() {
         val parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(49.0097, 2.5479))
         val lyonAirport = OverlayItem("Lyon Airport", "Lyon-Saint Exupéry Airport", GeoPoint(45.7215, 5.0824))
          **/
-
-        // Add two airports as overlay items
-        val parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(38.9435, 20.7352))
-        val lyonAirport = OverlayItem("Lyon Airport", "Lyon-Saint Exupéry Airport", GeoPoint( 54.4852, -1.8094))
-
-        overlayItems.addItem(parisAirport)
-        overlayItems.addItem(lyonAirport)
+        var numavion33 = "4ca76a"
+        var aerodep33= "EGGW"
+        var aeroariv33 = "LTBD"
+        var timevol33 = "0"
 
 
-        // Add the overlay items and polyline to the map
-        mapView.overlays.add(overlayItems)
 
         cardView = findViewById(R.id.cardView)
         showDetailsButton = findViewById(R.id.showDetailsButton)
         // Accédez au TextView contenant "Détails du vol"
-        val textViewDetailDuVol: TextView = cardView.findViewById(R.id.aerodep)
-        textViewDetailDuVol.text=parisAirport.title
+
         showDetailsButton.setOnClickListener {
             // Show the CardView when the button is clicked
             if (cardView.visibility == View.VISIBLE)
@@ -92,29 +88,36 @@ class InfoMap : AppCompatActivity() {
         detail3jours = findViewById(R.id.detail3jours)
         detail3jours.setOnClickListener {
             val intent = Intent(this, Detail3jour ::class.java)
-            //intent.putExtra("icao24", numavion)
-            //intent.putExtra("timevol", timevol)
-            //intent.putExtra("timevolfin", timevolfin)
+
+            //calcul trois jours
+            intent.putExtra("icao24", numavion33)
+            intent.putExtra("timevol", "1695878586")
+            intent.putExtra("timevolfin", "1696137786")
             startActivity(intent)
         }
         //aller a la page datail+
         detailplus = findViewById(R.id.detailplus)
         detailplus.setOnClickListener {
             val intent = Intent(this, PlusDetail ::class.java)
-            intent.putExtra("icao24", "407183")
-            intent.putExtra("timevol", "1695810322")
-            intent.putExtra("timevolfin", "1695819725")
+            intent.putExtra("icao24", numavion33)
+            intent.putExtra("timevol", "1695878586")
+            intent.putExtra("timevolfin", "1696137786")
             startActivity(intent)
         }
+
         GlobalScope.launch(Dispatchers.IO) {
-            val apiUrl = "https://opensky-network.org/api/tracks/all?icao24=407183&time=0"
+           var apiUrl= "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=$timevol33"
+
             val url = URL(apiUrl)
+
             val connection = url.openConnection() as HttpURLConnection
 
             connection.requestMethod = "GET"
+            Log.d("reponse", "responsecode")
             val responseCode = connection.responseCode
-
+            Log.d("reponse", "avant le if ")
             if (responseCode == HttpURLConnection.HTTP_OK) {
+                Log.d("reponse", "apres le if ")
                 val inputStream = connection.inputStream
                 val reader = BufferedReader(InputStreamReader(inputStream))
                 val response = StringBuilder()
@@ -123,9 +126,46 @@ class InfoMap : AppCompatActivity() {
                 while (reader.readLine().also { line = it } != null) {
                     response.append(line)
                 }
+                Log.d("toto", response.toString())
+
                 val jsonObject = JSONObject(response.toString())
                 val pathArray = jsonObject.getJSONArray("path")
 
+                val dernierElement = pathArray[pathArray.length() - 1]
+                if (dernierElement is JSONArray) {
+                    // Assurez-vous que c'est bien un tableau JSON
+                    val latitude = dernierElement.opt(1)
+                    val  longitude= dernierElement.opt(2)
+                    if (latitude!= null) {
+
+                        val latitude =  latitude.toString().toDouble()
+                        val longitude =  longitude.toString().toDouble()
+
+                      var parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(latitude, longitude))
+                        overlayItems.addItem(parisAirport)
+
+                        // Add the overlay items and polyline to the map
+                        mapView.overlays.add(overlayItems)
+                        Log.d("point", longitude.toString())
+                        Log.d("point", latitude.toString())
+                    }
+
+                }
+
+                val premierElement = pathArray.optJSONArray(0)
+                if (premierElement != null) {
+                    val latitudePremier = premierElement.opt(1)
+                    val longitudePremier = premierElement.opt(2)
+
+                    if (latitudePremier != null) {
+                        val latitudePremierValue = latitudePremier.toString().toDouble()
+                        val longitudePremierValue = longitudePremier.toString().toDouble()
+
+                        var autreMarqueur = OverlayItem("Autre Marqueur", "Description", GeoPoint(latitudePremierValue, longitudePremierValue))
+                        overlayItems.addItem(autreMarqueur)
+                    }
+                }
+                Log.d("last", response.toString())
                 // Créez une seule instance de Polyline en dehors de la boucle
                 val polyline = Polyline()
 
@@ -138,7 +178,7 @@ class InfoMap : AppCompatActivity() {
 
                     polyline.addPoint(geoPoint)
                 }
-
+                Log.d("toto", "Ceci est un message de débogage.")
                 // Ajoutez la Polyline à la carte en dehors de la boucle
                 mapView.overlays.add(polyline)
 

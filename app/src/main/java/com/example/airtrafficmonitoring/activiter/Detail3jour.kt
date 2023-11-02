@@ -1,6 +1,7 @@
  package com.example.airtrafficmonitoring.activiter
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.airtrafficmonitoring.R
@@ -19,13 +20,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airtrafficmonitoring.FlightAdapter
+import com.example.airtrafficmonitoring.FlightData
 import com.example.airtrafficmonitoring.FlightData3
 import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
  class Detail3jour : AppCompatActivity() {
      private lateinit var apiResponseTextView: TextView // Ajoutez cette ligne
      private lateinit var viewModel: HomeViewModel
      private lateinit var recyclerView: RecyclerView
+     private val flightList = mutableListOf<FlightData3>()
+
      @SuppressLint("MissingInflatedId")
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
@@ -33,26 +39,10 @@ import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
 
          apiResponseTextView = findViewById(R.id.apiResponseTextView) // Récupérez la référence du TextView
 
+
 //---------------------------------------------------------*
          viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-         val flightList = listOf(
-             FlightData3(
-                 "Aéroport de départ 1",
-                 "Aéroport d'arrivée 1",
-                 "2023-10-26 08:00",
-                 "2023-10-26 10:00",
-                 "2 heures",
-                 "Vol 123"
-             ),
-             FlightData3(
-                 "Aéroport de départ 2",
-                 "Aéroport d'arrivée 2",
-                 "2023-10-26 11:30",
-                 "2023-10-26 13:30",
-                 "2 heures",
-                 "Vol 456"
-             )
-         )
+
 
          recyclerView = findViewById(R.id.flightRecyclerView)
          recyclerView.layoutManager = LinearLayoutManager(this)
@@ -65,7 +55,9 @@ import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
      }
 
      private fun fetchDataFromAPI() {
-         val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=407183&begin=1695810322&end=1695983276"
+         var intent: Intent? = getIntent()
+         var numavion = intent!!.getStringExtra("icao24")
+         val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=1695810322&end=1695983276"
 
          try {
              val url = URL(urlStr)
@@ -73,7 +65,7 @@ import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
 
              connection.requestMethod = "GET"
              val responseCode = connection.responseCode
-
+             Log.d("33jour", responseCode.toString())
              if (responseCode == HttpURLConnection.HTTP_OK) {
                  val inputStream = connection.inputStream
                  val reader = BufferedReader(InputStreamReader(inputStream))
@@ -83,16 +75,33 @@ import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
                  while (reader.readLine().also { line = it } != null) {
                      response.append(line)
                  }
-
+                 Log.d("titi", "totototo ")
+                 val gson = Gson()
+                 val listType = object : TypeToken<List<FlightData>>() {}.type
+                 val flightDataList = gson.fromJson<List<FlightData>>(response.toString(), listType)
+                 Log.d("reponsetoto", flightDataList.toString())
+                 val newFlightList = flightDataList .map { flightInfo ->
+                     FlightData3(
+                         flightInfo.estDepartureAirport ?: "Aéroport inconnu",
+                         flightInfo.estArrivalAirport ?: "Aéroport inconnu",
+                         flightInfo.firstSeen.toString(),
+                         flightInfo.lastSeen.toString(),
+                         "2 heures",
+                         flightInfo.callsign
+                     )
+                 }
+                 flightList.addAll(newFlightList)
                  // Mettez à jour le TextView avec la réponse de l'API sur le thread principal.
                  runOnUiThread {
-                     apiResponseTextView.text = response.toString()
+                     recyclerView.adapter = FlightAdapter(flightList)
+
+                     apiResponseTextView.text ="update"
                  }
              } else {
-                 // Gérez les erreurs ici en cas de réponse non 200 OK.
+                 Log.d("reponse", "erreur if ")
              }
          } catch (e: Exception) {
-             // Gérez les exceptions ici, par exemple, une exception d'URL mal formée.
+             Log.d("reponse", "erreur try")
          }
      }
  }

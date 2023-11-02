@@ -75,8 +75,9 @@ class PlusDetail : AppCompatActivity() {
             val connection = url.openConnection() as HttpURLConnection
 
             connection.requestMethod = "GET"
+            Log.d("attent", "thread")
             val responseCode = connection.responseCode
-
+            Log.d("attent", "thread")
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 val inputStream = connection.inputStream
                 val reader = BufferedReader(InputStreamReader(inputStream))
