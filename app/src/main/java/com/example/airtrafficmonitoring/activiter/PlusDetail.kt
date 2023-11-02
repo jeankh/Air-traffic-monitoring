@@ -3,6 +3,7 @@ package com.example.airtrafficmonitoring.activiter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.airtrafficmonitoring.FlightData
@@ -39,6 +40,11 @@ class PlusDetail : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_plus_detail)
 
+        val btnBack = findViewById<Button>(R.id.btnBack)
+
+        btnBack.setOnClickListener {
+            onBackPressed()
+        }
         apiResponseTextView = findViewById(R.id.apiResponseTextView) // Récupérez la référence du TextView
         firstSeen = findViewById(R.id.firstSeen)
         estDepartureAirport = findViewById(R.id.estDepartureAirport)

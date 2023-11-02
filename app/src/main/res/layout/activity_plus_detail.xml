@@ -6,14 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activiter.PlusDetail">
-
-
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
   <LinearLayout
       xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,178 +15,321 @@
       android:orientation="vertical"
       android:padding="16dp"
       tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/icanlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="toto"
-        android:textSize="18sp" />
-
-      <TextView
-        android:id="@+id/apiResponseTextView"
+      <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="titi" />
-//----------------------------------
-    <TextView
-        android:id="@+id/firstlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
 
-      <TextView
-        android:id="@+id/firstSeen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-    //------------------------------------
-    <TextView
-        android:id="@+id/estdapartlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+              <TextView
+                  android:id="@+id/icanlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="toto"
+                  style="@style/Sizetext" />
 
-      <TextView
-        android:id="@+id/estDepartureAirport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-//----------------------------------
-    <TextView
-        android:id="@+id/lastlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
 
-      <TextView
-        android:id="@+id/lastSeen"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
+              <TextView
+                  android:id="@+id/apiResponseTextView"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Enter text here"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
 
-    //-------------------------------------------
-    <TextView
-        android:id="@+id/estarrivallabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
 
-      <TextView
-        android:id="@+id/estArrivalAirport"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-//-------------------------------------------------
-    <TextView
-        android:id="@+id/callsignlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+              <TextView
+                  android:id="@+id/firstlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="first seen:"
+                  style="@style/Sizetext" />
 
-      <TextView
-        android:id="@+id/callsign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-    //----------------------------
-    <TextView
-        android:id="@+id/estdepartdistancelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
 
-      <TextView
-        android:id="@+id/estDepartureAirportHorizDistance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
+              <TextView
+                  android:id="@+id/firstSeen"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="Enter text here"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
 
-    //----------------------------------
-    <TextView
-        android:id="@+id/estDepartureAirportVertDistancelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
 
-      <TextView
-        android:id="@+id/estDepartureAirportVertDistance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-    //------------------------------
-    <TextView
-        android:id="@+id/estArrivalAirportHorizDistancelabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
 
-      <TextView
-        android:id="@+id/estArrivalAirportHorizDistance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-    //------------------------------
+              <TextView
+                  android:id="@+id/estdapartlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="aeroport dep"
+                  style="@style/Sizetext" />
 
-    <TextView
-        android:id="@+id/estArrivalAirportVertDistancelabel"
+              <TextView
+                  android:id="@+id/estDepartureAirport"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/lastlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="last seen"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/lastSeen"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
+
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/estarrivallabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="aeroport arrive"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/estArrivalAirport"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/callsignlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="callsign"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/callsign"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
+
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/estdepartdistancelabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="Distance horizontale dep"
+                  style="@style/Sizetext" />
+              <TextView
+                  android:id="@+id/estDepartureAirportHorizDistance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/estDepartureAirportVertDistancelabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="distance vertical dep"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/estDepartureAirportVertDistance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
+
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+              <TextView
+                  android:id="@+id/estArrivalAirportHorizDistancelabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="horizontal distance arriv"
+                  style="@style/Sizetext" />
+              <TextView
+                  android:id="@+id/estArrivalAirportHorizDistance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/estArrivalAirportVertDistancelabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="vertical distance arriver"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/estArrivalAirportVertDistance"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
+          android:orientation="horizontal">
+
+          <!-- Colonne "Nom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/departureAirportCandidatesCountlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="nb candidat potentiel pour aero dep"
+                  style="@style/Sizetext" />
+
+              <TextView
+                  android:id="@+id/departureAirportCandidatesCount"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+
+          <!-- Colonne "Prénom" -->
+          <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:orientation="vertical">
+
+              <TextView
+                  android:id="@+id/arrivalAirportCandidatesCountlabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="nb candidat potentiel aero arriv"
+                  style="@style/Sizetext"/>
+
+              <TextView
+                  android:id="@+id/arrivalAirportCandidatesCount"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="chargement..."
+                  style="@style/Sizelabel" />
+          </LinearLayout>
+      </LinearLayout>
+      <Button
+          android:id="@+id/btnBack"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="Label:"
-          android:textSize="18sp" />
-
-      <TextView
-          android:id="@+id/estArrivalAirportVertDistance"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:hint="Enter text here"
-          android:text="Label:" />
-
-    //-----------------------------------
-    <TextView
-        android:id="@+id/departureAirportCandidatesCountlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
-
-      <TextView
-        android:id="@+id/departureAirportCandidatesCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:" />
-    //-------------------------------------------
-    <TextView
-        android:id="@+id/arrivalAirportCandidatesCountlabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Label:"
-        android:textSize="18sp" />
-
-      <TextView
-        android:id="@+id/arrivalAirportCandidatesCount"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter text here"
-        android:text="Label:"/>
+          android:text="Retour" />
   </LinearLayout>
-    </ScrollView>
+
   </androidx.constraintlayout.widget.ConstraintLayout>

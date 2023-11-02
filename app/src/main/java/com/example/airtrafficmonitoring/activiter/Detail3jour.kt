@@ -15,6 +15,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.util.Log
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -52,6 +53,11 @@ import com.google.gson.reflect.TypeToken
          // Exécutez la requête sur un thread d'arrière-plan (utilisation de Kotlin Coroutines).
          GlobalScope.launch(Dispatchers.IO) {
              fetchDataFromAPI()
+         }
+         val btnBack = findViewById<Button>(R.id.btnBack)
+
+         btnBack.setOnClickListener {
+             onBackPressed()
          }
      }
 
