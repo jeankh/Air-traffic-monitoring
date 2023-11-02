@@ -2,6 +2,7 @@
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.icu.util.Calendar
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.airtrafficmonitoring.R
@@ -57,6 +58,15 @@ import com.google.gson.reflect.TypeToken
      private fun fetchDataFromAPI() {
          var intent: Intent? = getIntent()
          var numavion = intent!!.getStringExtra("icao24")
+         val calendarNow = Calendar.getInstance()
+         val timestampNow = calendarNow.timeInMillis / 1000
+
+         val calendarThreeDaysAgo = Calendar.getInstance()
+         calendarThreeDaysAgo.add(Calendar.DAY_OF_YEAR, -3)
+         val timestampThreeDaysAgo = calendarThreeDaysAgo.timeInMillis / 1000
+
+         Log.d("Timestamp", "Timestamp actuel : $timestampNow")
+         Log.d("Timestamp", "Timestamp il y a trois jours : $timestampThreeDaysAgo")
          val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=1695810322&end=1695983276"
 
          try {
