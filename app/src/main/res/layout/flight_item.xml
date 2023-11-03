@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Départ : "
-            android:textSize="18sp"/>
+            android:textSize="30sp"/>
 
 
         <TextView
@@ -24,32 +24,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Arrivée : "
-            android:textSize="18sp"/>
+            android:textSize="30sp"/>
 
 
         <TextView
             android:id="@+id/departureDateTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date de départ : " />
+            android:text="Date de départ : "
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/arrivalDateTimeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Date d'arrivée : " />
+            android:text="Date d'arrivée : "
+            android:textSize="30sp"/>
 
         <TextView
             android:id="@+id/flightDurationTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Temps de vol : " />
+            android:text="Temps de vol : "
+            android:textSize="30sp"
+            />
 
         <TextView
             android:id="@+id/flightNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom du vol : " />
+            android:text="Nom du vol : "
+            android:textSize="30sp"/>
 
     </LinearLayout>
 
