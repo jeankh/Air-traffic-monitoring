@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
@@ -66,6 +67,8 @@ import com.google.gson.reflect.TypeToken
          var numavion = intent!!.getStringExtra("icao24")
          val calendarNow = Calendar.getInstance()
          val timestampNow = calendarNow.timeInMillis / 1000
+         val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+         val progressText =findViewById<TextView>(R.id.progressText)
 
          val calendarThreeDaysAgo = Calendar.getInstance()
          calendarThreeDaysAgo.add(Calendar.DAY_OF_YEAR, -3)
@@ -74,8 +77,6 @@ import com.google.gson.reflect.TypeToken
          Log.d("Timestamp", "Timestamp actuel : $timestampNow")
          Log.d("Timestamp", "Timestamp il y a trois jours : $timestampThreeDaysAgo")
          val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=1695810322&end=1695983276"
-
-         try {
              val url = URL(urlStr)
              val connection = url.openConnection() as HttpURLConnection
 
@@ -113,12 +114,12 @@ import com.google.gson.reflect.TypeToken
 
                      apiResponseTextView.text ="update"
                  }
-             } else {
-                 Log.d("reponse", "erreur if ")
              }
-         } catch (e: Exception) {
-             Log.d("reponse", "erreur try")
-         }
+             else{
+                 runOnUiThread {
+                     progressText.text="pas de signal"
+                 }
+             }
      }
  }
 

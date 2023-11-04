@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import com.example.airtrafficmonitoring.FlightData
@@ -76,7 +77,8 @@ class PlusDetail : AppCompatActivity() {
 
     private fun fetchDataFromAPI(urlStr:String) {
 
-        try {
+        val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+        val progressText =findViewById<TextView>(R.id.progressText)
             val url = URL(urlStr)
             val connection = url.openConnection() as HttpURLConnection
 
@@ -114,12 +116,14 @@ class PlusDetail : AppCompatActivity() {
                     arrivalAirportCandidatesCount.text = flightDataList[0].arrivalAirportCandidatesCount.toString()
 
                 }
-            } else {
-                // Gérez les erreurs ici en cas de réponse non 200 OK.
             }
-        } catch (e: Exception) {
-            // Gérez les exceptions ici, par exemple, une exception d'URL mal formée.
-        }
+                else{
+                runOnUiThread {
+                    progressText.text="pas de signal"
+                }
+                }
+
+
     }
 }
 

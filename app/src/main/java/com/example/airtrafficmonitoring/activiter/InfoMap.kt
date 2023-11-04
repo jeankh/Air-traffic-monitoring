@@ -1,4 +1,5 @@
 package com.example.airtrafficmonitoring.activiter
+import android.annotation.SuppressLint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -43,6 +45,7 @@ class InfoMap : AppCompatActivity() {
 
     lateinit var numavion33: String
 
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_map)
@@ -106,15 +109,21 @@ class InfoMap : AppCompatActivity() {
         }
 
         GlobalScope.launch(Dispatchers.IO) {
-           var apiUrl= "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=$timevol33"
-
+            var apiUrl= "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=$timevol33"
+            val progressBar = findViewById<ProgressBar>(R.id.progressBar)
+            val progressText =findViewById<TextView>(R.id.progressText)
             val url = URL(apiUrl)
 
             val connection = url.openConnection() as HttpURLConnection
+            runOnUiThread {
+                progressBar.visibility = View.VISIBLE
+
+            }
 
             connection.requestMethod = "GET"
             Log.d("reponse", "responsecode")
             val responseCode = connection.responseCode
+
             Log.d("reponse", "avant le if ")
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 Log.d("reponse", "apres le if ")
@@ -141,7 +150,7 @@ class InfoMap : AppCompatActivity() {
                         val latitude =  latitude.toString().toDouble()
                         val longitude =  longitude.toString().toDouble()
 
-                      var parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(latitude, longitude))
+                        var parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(latitude, longitude))
                         overlayItems.addItem(parisAirport)
 
                         // Add the overlay items and polyline to the map
@@ -182,6 +191,18 @@ class InfoMap : AppCompatActivity() {
                 // Ajoutez la Polyline à la carte en dehors de la boucle
                 mapView.overlays.add(polyline)
 
+                runOnUiThread {
+                    progressBar.visibility = View.GONE
+                    progressText.visibility = View.GONE
+                }
+
+
+
+            }
+            else{
+                runOnUiThread {
+                    progressText.text="pas de signal"
+                }
             }
             mapView.invalidate()
         }
