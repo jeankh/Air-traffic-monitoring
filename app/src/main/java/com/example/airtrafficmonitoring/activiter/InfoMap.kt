@@ -1,10 +1,12 @@
 package com.example.airtrafficmonitoring.activiter
 import android.annotation.SuppressLint
+import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.content.Intent
 import android.content.Intent.getIntent
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -107,11 +109,15 @@ class InfoMap : AppCompatActivity() {
             intent.putExtra("timevolfin", "1696137786")
             startActivity(intent)
         }
-
+        val progressText =findViewById<TextView>(R.id.progressText)
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected) {
+            Log.d("internet", "internat")
         GlobalScope.launch(Dispatchers.IO) {
             var apiUrl= "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=$timevol33"
             val progressBar = findViewById<ProgressBar>(R.id.progressBar)
-            val progressText =findViewById<TextView>(R.id.progressText)
+
             val url = URL(apiUrl)
 
             val connection = url.openConnection() as HttpURLConnection
@@ -207,6 +213,12 @@ class InfoMap : AppCompatActivity() {
             mapView.invalidate()
         }
 
+    } else {
+        // Pas de connexion Internet, affichez un message d'erreur ou effectuez une action appropriée
+        runOnUiThread {
+            progressText.text = "Pas de connexion Internet"
+        }
+    }
     }
 
     override fun onResume() {

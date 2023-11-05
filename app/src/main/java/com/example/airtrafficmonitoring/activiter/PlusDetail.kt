@@ -1,5 +1,7 @@
 package com.example.airtrafficmonitoring.activiter
 
+import android.content.Context
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -66,13 +68,23 @@ class PlusDetail : AppCompatActivity() {
         val finvol = intent.getStringExtra("timevolfin")
 
         val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=$debutvol&end=$finvol"
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = connectivityManager.activeNetworkInfo
+        val progressText =findViewById<TextView>(R.id.progressText)
+        if (networkInfo != null && networkInfo.isConnected){
+            GlobalScope.launch(Dispatchers.IO) {
+                fetchDataFromAPI(urlStr)
+            }
 
-
+        }
+        else{
+            runOnUiThread {
+                progressText.text = "Pas de connexion Internet"
+            }
+        }
         //---------------------------------------
         // Exécutez la requête sur un thread d'arrière-plan (utilisation de Kotlin Coroutines).
-        GlobalScope.launch(Dispatchers.IO) {
-            fetchDataFromAPI(urlStr)
-        }
+
     }
 
     private fun fetchDataFromAPI(urlStr:String) {

@@ -1,8 +1,10 @@
  package com.example.airtrafficmonitoring.activiter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.icu.util.Calendar
+import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.airtrafficmonitoring.R
@@ -50,11 +52,24 @@ import com.google.gson.reflect.TypeToken
          recyclerView = findViewById(R.id.flightRecyclerView)
          recyclerView.layoutManager = LinearLayoutManager(this)
          recyclerView.adapter = FlightAdapter(flightList)
+         val progressText =findViewById<TextView>(R.id.progressText)
+
+         val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+         val networkInfo = connectivityManager.activeNetworkInfo
+         if (networkInfo != null && networkInfo.isConnected){
+             GlobalScope.launch(Dispatchers.IO) {
+                 fetchDataFromAPI()
+             }
+         } else {
+             // Pas de connexion Internet, affichez un message d'erreur ou effectuez une action appropriée
+             runOnUiThread {
+                 progressText.text = "Pas de connexion Internet"
+             }}
          //---------------------------------------
          // Exécutez la requête sur un thread d'arrière-plan (utilisation de Kotlin Coroutines).
-         GlobalScope.launch(Dispatchers.IO) {
-             fetchDataFromAPI()
-         }
+
+
+
          val btnBack = findViewById<Button>(R.id.btnBack)
 
          btnBack.setOnClickListener {
