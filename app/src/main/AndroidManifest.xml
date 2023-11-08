@@ -18,7 +18,7 @@
 
 
         <activity
-            android:name=".activiter.Home"
+            android:name=".activiter.InfoMap"
             android:exported="false" />
         <activity
             android:name=".activiter.ListeResult"
@@ -33,7 +33,7 @@
             android:name=".activiter.Detail3jour"
             android:exported="false" />
         <activity
-            android:name=".activiter.InfoMap"
+            android:name=".activiter.Home"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
