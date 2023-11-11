@@ -70,7 +70,13 @@
                     android:layout_height="wrap_content"
                     android:text="voir vol sur 3 jours" />
 
+
             </LinearLayout>
+            <Button
+                android:id="@+id/avionactuel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="afficher l'avion actuellement" />
 
         </LinearLayout>
 

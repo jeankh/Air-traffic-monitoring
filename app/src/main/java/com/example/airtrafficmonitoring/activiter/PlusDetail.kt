@@ -83,9 +83,6 @@ class PlusDetail : AppCompatActivity() {
                 progressText.text = "Pas de connexion Internet"
             }
         }
-        //---------------------------------------
-        // Exécutez la requête sur un thread d'arrière-plan (utilisation de Kotlin Coroutines).
-
     }
 
     private fun fetchDataFromAPI(urlStr:String) {
@@ -94,11 +91,9 @@ class PlusDetail : AppCompatActivity() {
         val progressText =findViewById<TextView>(R.id.progressText)
             val url = URL(urlStr)
             val connection = url.openConnection() as HttpURLConnection
-
             connection.requestMethod = "GET"
-            Log.d("attent", "thread")
             val responseCode = connection.responseCode
-            Log.d("attent", "thread")
+            //reponse de API
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 val inputStream = connection.inputStream
                 val reader = BufferedReader(InputStreamReader(inputStream))
@@ -111,11 +106,10 @@ class PlusDetail : AppCompatActivity() {
                 val gson = Gson()
                 val listType = object : TypeToken<List<FlightData>>() {}.type
                 val flightDataList = gson.fromJson<List<FlightData>>(response.toString(), listType)
-                Log.d("TAG", flightDataList[0].icao24.toString())
+
                 // Mettez à jour le TextView avec la réponse de l'API sur le thread principal.
                 runOnUiThread {
                     apiResponseTextView.text = flightDataList[0].icao24
-
                     firstSeen.text = flightDataList[0].firstSeen.toString()
                     estDepartureAirport.text = flightDataList[0].estDepartureAirport
                     lastSeen.text = flightDataList[0].lastSeen.toString()
@@ -129,9 +123,6 @@ class PlusDetail : AppCompatActivity() {
                     arrivalAirportCandidatesCount.text = flightDataList[0].arrivalAirportCandidatesCount.toString()
                     progressBar.visibility = View.GONE
                     progressText.visibility = View.GONE
-
-
-
                 }
             }
                 else{
@@ -139,13 +130,8 @@ class PlusDetail : AppCompatActivity() {
                     progressText.text="pas de signal"
                 }
                 }
-
-
     }
 }
-
-
-
 /**[
 {
     "icao24": "407183",

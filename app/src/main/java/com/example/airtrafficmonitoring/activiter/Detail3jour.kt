@@ -34,7 +34,7 @@ import com.google.gson.reflect.TypeToken
 
  //mettre le time 0 dans un bouton sur la meme interface
  class Detail3jour : AppCompatActivity() {
-     private lateinit var apiResponseTextView: TextView // Ajoutez cette ligne
+
      private lateinit var viewModel: HomeViewModel
      private lateinit var recyclerView: RecyclerView
      private val flightList = mutableListOf<FlightData3>()
@@ -43,19 +43,14 @@ import com.google.gson.reflect.TypeToken
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
          setContentView(R.layout.activity_detail3jour)
-
-         apiResponseTextView = findViewById(R.id.apiResponseTextView) // Récupérez la référence du TextView
-
-
-//---------------------------------------------------------*
          viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-
-
+         //recyclerview
          recyclerView = findViewById(R.id.flightRecyclerView)
          recyclerView.layoutManager = LinearLayoutManager(this)
          recyclerView.adapter = FlightAdapter(flightList)
-         val progressText =findViewById<TextView>(R.id.progressText)
 
+         val progressText =findViewById<TextView>(R.id.progressText)
+         //connexion internet
          val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
          val networkInfo = connectivityManager.activeNetworkInfo
          if (networkInfo != null && networkInfo.isConnected){
@@ -67,21 +62,17 @@ import com.google.gson.reflect.TypeToken
              runOnUiThread {
                  progressText.text = "Pas de connexion Internet"
              }}
-         //---------------------------------------
-         // Exécutez la requête sur un thread d'arrière-plan (utilisation de Kotlin Coroutines).
-
-
-
          val btnBack = findViewById<Button>(R.id.btnBack)
-
          btnBack.setOnClickListener {
              onBackPressed()
          }
      }
 
      private fun fetchDataFromAPI() {
+         //recuperation des donnée de l'ex-activity
          var intent: Intent? = getIntent()
          var numavion = intent!!.getStringExtra("icao24")
+         //calcul des time pour 3jours
          val calendarNow = Calendar.getInstance()
          val timestampNow = calendarNow.timeInMillis / 1000
          val progressBar = findViewById<ProgressBar>(R.id.progressBar)
@@ -90,30 +81,23 @@ import com.google.gson.reflect.TypeToken
          val calendarThreeDaysAgo = Calendar.getInstance()
          calendarThreeDaysAgo.add(Calendar.DAY_OF_YEAR, -3)
          val timestampThreeDaysAgo = calendarThreeDaysAgo.timeInMillis / 1000
-
-         Log.d("Timestamp", "Timestamp actuel : $timestampNow")
-         Log.d("Timestamp", "Timestamp il y a trois jours : $timestampThreeDaysAgo")
-         val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=1695810322&end=1695983276"
+         val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=$timestampThreeDaysAgo&end=$timestampNow"
              val url = URL(urlStr)
              val connection = url.openConnection() as HttpURLConnection
-
              connection.requestMethod = "GET"
              val responseCode = connection.responseCode
-             Log.d("33jour", responseCode.toString())
+            //reponse de API
              if (responseCode == HttpURLConnection.HTTP_OK) {
                  val inputStream = connection.inputStream
                  val reader = BufferedReader(InputStreamReader(inputStream))
                  val response = StringBuilder()
                  var line: String?
-
                  while (reader.readLine().also { line = it } != null) {
                      response.append(line)
                  }
-                 Log.d("titi", "totototo ")
                  val gson = Gson()
                  val listType = object : TypeToken<List<FlightData>>() {}.type
                  val flightDataList = gson.fromJson<List<FlightData>>(response.toString(), listType)
-                 Log.d("reponsetoto", flightDataList.toString())
                  val newFlightList = flightDataList .map { flightInfo ->
                      FlightData3(
                          flightInfo.estDepartureAirport ?: "Aéroport inconnu",
@@ -128,7 +112,6 @@ import com.google.gson.reflect.TypeToken
                  // Mettez à jour le TextView avec la réponse de l'API sur le thread principal.
                  runOnUiThread {
                      recyclerView.adapter = FlightAdapter(flightList)
-
                      progressBar.visibility = View.GONE
                      progressText.visibility = View.GONE
 
