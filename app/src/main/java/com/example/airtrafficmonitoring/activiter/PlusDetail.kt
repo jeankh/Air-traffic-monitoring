@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -126,6 +127,10 @@ class PlusDetail : AppCompatActivity() {
                     estArrivalAirportVertDistance.text = flightDataList[0].estArrivalAirportVertDistance.toString()
                     departureAirportCandidatesCount.text = flightDataList[0].departureAirportCandidatesCount.toString()
                     arrivalAirportCandidatesCount.text = flightDataList[0].arrivalAirportCandidatesCount.toString()
+                    progressBar.visibility = View.GONE
+                    progressText.visibility = View.GONE
+
+
 
                 }
             }

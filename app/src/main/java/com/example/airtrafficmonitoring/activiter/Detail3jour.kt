@@ -16,6 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ProgressBar
@@ -31,6 +32,7 @@ import com.example.airtrafficmonitoring.ViewModels.HomeViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
+ //mettre le time 0 dans un bouton sur la meme interface
  class Detail3jour : AppCompatActivity() {
      private lateinit var apiResponseTextView: TextView // Ajoutez cette ligne
      private lateinit var viewModel: HomeViewModel
@@ -127,7 +129,9 @@ import com.google.gson.reflect.TypeToken
                  runOnUiThread {
                      recyclerView.adapter = FlightAdapter(flightList)
 
-                     apiResponseTextView.text ="update"
+                     progressBar.visibility = View.GONE
+                     progressText.visibility = View.GONE
+
                  }
              }
              else{
