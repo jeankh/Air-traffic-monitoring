@@ -1,5 +1,6 @@
  package com.example.airtrafficmonitoring.activiter
 
+import Detail3jourViewModel
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -15,13 +16,14 @@ import java.net.URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.util.Log
+
 import android.view.View
-import android.widget.ArrayAdapter
+
 import android.widget.Button
 import android.widget.ProgressBar
-import android.widget.Spinner
+
 import android.widget.TextView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -35,7 +37,7 @@ import com.google.gson.reflect.TypeToken
  //mettre le time 0 dans un bouton sur la meme interface
  class Detail3jour : AppCompatActivity() {
 
-     private lateinit var viewModel: HomeViewModel
+     private lateinit var viewModel: Detail3jourViewModel
      private lateinit var recyclerView: RecyclerView
      private val flightList = mutableListOf<FlightData3>()
 
@@ -43,7 +45,8 @@ import com.google.gson.reflect.TypeToken
      override fun onCreate(savedInstanceState: Bundle?) {
          super.onCreate(savedInstanceState)
          setContentView(R.layout.activity_detail3jour)
-         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+         viewModel = ViewModelProvider(this).get(Detail3jourViewModel::class.java)
+
          //recyclerview
          recyclerView = findViewById(R.id.flightRecyclerView)
          recyclerView.layoutManager = LinearLayoutManager(this)
@@ -54,13 +57,26 @@ import com.google.gson.reflect.TypeToken
          val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
          val networkInfo = connectivityManager.activeNetworkInfo
          if (networkInfo != null && networkInfo.isConnected){
-             GlobalScope.launch(Dispatchers.IO) {
-                 fetchDataFromAPI()
+             val sauvegarde = viewModel.getFlightList().value
+
+             if (sauvegarde != null) {
+                 GlobalScope.launch(Dispatchers.IO) {
+                     fetchDataFromAPI()
+                 }
+             }
+             else{
+                 viewModel.getFlightList().observe(this, Observer { updatedFlightList ->
+                     // Mettre à jour le RecyclerView et masquer la barre de progression
+                     flightList.clear()
+                     flightList.addAll(updatedFlightList)
+                     recyclerView.adapter?.notifyDataSetChanged()
+
+                 })
              }
          } else {
              // Pas de connexion Internet, affichez un message d'erreur ou effectuez une action appropriée
              runOnUiThread {
-                 progressText.text = "Pas de connexion Internet"
+                 progressText.text = "Pas de connexi    on Internet"
              }}
          val btnBack = findViewById<Button>(R.id.btnBack)
          btnBack.setOnClickListener {
@@ -108,6 +124,7 @@ import com.google.gson.reflect.TypeToken
                          flightInfo.callsign
                      )
                  }
+                 viewModel.setFlightList(newFlightList)
                  flightList.addAll(newFlightList)
                  // Mettez à jour le TextView avec la réponse de l'API sur le thread principal.
                  runOnUiThread {
