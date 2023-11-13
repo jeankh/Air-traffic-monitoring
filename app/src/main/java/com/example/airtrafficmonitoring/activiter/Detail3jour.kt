@@ -8,6 +8,7 @@ import android.icu.util.Calendar
 import android.net.ConnectivityManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.airtrafficmonitoring.R
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -58,8 +59,9 @@ import com.google.gson.reflect.TypeToken
          val networkInfo = connectivityManager.activeNetworkInfo
          if (networkInfo != null && networkInfo.isConnected){
              val sauvegarde = viewModel.getFlightList().value
-
-             if (sauvegarde != null) {
+             Log.d("totocela",sauvegarde.toString())
+             if (sauvegarde == null) {
+                 Log.d("totocela", "df")
                  GlobalScope.launch(Dispatchers.IO) {
                      fetchDataFromAPI()
                  }
@@ -93,15 +95,19 @@ import com.google.gson.reflect.TypeToken
          val timestampNow = calendarNow.timeInMillis / 1000
          val progressBar = findViewById<ProgressBar>(R.id.progressBar)
          val progressText =findViewById<TextView>(R.id.progressText)
-
+         Log.d("totocela", "df")
          val calendarThreeDaysAgo = Calendar.getInstance()
          calendarThreeDaysAgo.add(Calendar.DAY_OF_YEAR, -3)
          val timestampThreeDaysAgo = calendarThreeDaysAgo.timeInMillis / 1000
+         Log.d("totocela", timestampNow.toString())
+         Log.d("totocela", timestampThreeDaysAgo.toString())
          val urlStr = "https://opensky-network.org/api/flights/aircraft?icao24=$numavion&begin=$timestampThreeDaysAgo&end=$timestampNow"
              val url = URL(urlStr)
+         Log.d("totocela", urlStr)
              val connection = url.openConnection() as HttpURLConnection
              connection.requestMethod = "GET"
              val responseCode = connection.responseCode
+         Log.d("totocela", "sfd")
             //reponse de API
              if (responseCode == HttpURLConnection.HTTP_OK) {
                  val inputStream = connection.inputStream
