@@ -108,6 +108,7 @@
             }
             val progressBar = findViewById<ProgressBar>(R.id.progressBar)
             val progressText =findViewById<TextView>(R.id.progressText)
+
             //test pour internet
             val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val networkInfo = connectivityManager.activeNetworkInfo
@@ -115,6 +116,7 @@
             {
                 //sauvegarde pour la rotation
                 val sauvegarde = viewModel.parisAirportLiveData.value
+                Log.d("ViewModelmap", sauvegarde.toString())
                 if (sauvegarde == null) {
                         //coroutine
                         //requete api
@@ -155,7 +157,7 @@
                                     aeroportarriver.title = "Paris Airport"
                                     aeroportarriver.snippet = "Charles de Gaulle Airport"
 
-
+                                    viewModel.updateaeroportarriver(aeroportarriver)
                                     mapView.overlays.add(aeroportarriver)
                                     // Add the overlay items and polyline to the map
                                     mapView.overlays.add(overlayItems)
@@ -212,8 +214,6 @@
                     }
                 }
                 else{
-                    progressBar.visibility = View.GONE
-                    progressText.visibility = View.GONE
                     viewModel.parisAirportLiveData.observe(this, Observer { parisAirport ->
                         val testMarker = Marker(mapView)
                         testMarker.position = GeoPoint(parisAirport.position.latitude, parisAirport.position.longitude) // Coordonnées de Paris
@@ -279,6 +279,7 @@
                     // Traitement de la réponse JSON
                     withContext(Dispatchers.Main) {
                         processResponse(response.toString())
+
                     }
                 }
             }
@@ -336,12 +337,10 @@
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
                 val responseCode = connection.responseCode
-                Log.d("totocela", "Description mise à jour avec succès")
-
                 // Vérifier si la réponse à l'API est OK
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    Log.d("totocela", "Description mise à jour avec succès")
 
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    Log.d("ViewModelmapp", "dfsd")
                     val inputStream = connection.inputStream
                     val reader = BufferedReader(InputStreamReader(inputStream))
                     val response = StringBuilder()
@@ -350,21 +349,28 @@
                     while (reader.readLine().also { line = it } != null) {
                         response.append(line)
                     }
-
+                    Log.d("ViewModelmapp", "dfsdd")
                     // Mettre à jour la description du marqueur
                     withContext(Dispatchers.Main) {
+                        Log.d("ViewModelmapp", "dfsddd")
                         updateMarkerDescription(response.toString())
                     }
+                }
+                else{
+                    Log.d("ViewModelmapp", "nonononon")
                 }
             }
         }
 
         private fun updateMarkerDescription(response: String) {
-            Log.d("totocela", response)
+            if (response !=null){
 
             val jsonObject = JSONObject(response)
-            val statesArray = jsonObject.getJSONArray("states")
 
+                val status = jsonObject.optString("status", "")
+                Log.d("ViewModelmapp", status)
+                if (status !=""){
+                    val statesArray = jsonObject.getJSONArray("states")
             // Vérifier s'il y a au moins un état dans la réponse
             if (statesArray.length() > 0) {
                 val aircraftState = statesArray.getJSONArray(0)
@@ -379,6 +385,7 @@
                     mapView.invalidate()
                 }
             }
+            }}
         }
     }
 
