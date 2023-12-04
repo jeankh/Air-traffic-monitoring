@@ -32,6 +32,10 @@
         <activity
             android:name=".activiter.Detail3jour"
             android:exported="false" />
+        <activity android:name=".activiter.FlightListActivity"
+            android:exported="false"
+            />
+
         <activity
             android:name=".activiter.Home"
             android:exported="true">

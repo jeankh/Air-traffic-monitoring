@@ -31,30 +31,6 @@ class HomeViewModel : ViewModel() {
         }
         airportListNamesLiveData.value = airportNamesList
     }
-    fun requestFlightsList(isArrival: Boolean, selectedAirportIndex: Int){
-        viewModelScope.launch {
-
-                val url =  if (isArrival) "https://opensky-network.org/api/flights/arrival" else "https://opensky-network.org/api/flights/departure"
-            val params = HashMap<String, String>()
-            params.put("begin", (beginDateLiveData.value!!.timeInMillis!! / 1000).toString())
-            params.put("end", (endDateLiveData.value!!.timeInMillis!! / 1000).toString())
-
-
-            params.put("airport", airportListLiveData.value!![selectedAirportIndex].icao)
-
-
-            val result = withContext(Dispatchers.IO) {
-                RequestManager.getSuspended(url, params)
-            }
-            if (result != null) {
-                Log.i("REQUEST", result)
-
-            } else {
-                Log.e("REQUEST", "ERROR NO RESULT")
-            }
-
-        }
-    }
 
     enum class DateType {
         BEGIN, END
@@ -80,4 +56,3 @@ class HomeViewModel : ViewModel() {
         return airportListLiveData
     }
 }
-

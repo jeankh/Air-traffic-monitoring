@@ -23,9 +23,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.withContext
 
 class Home : AppCompatActivity() {
-    private val viewModelScope = CoroutineScope(Dispatchers.IO + SupervisorJob())
-
-    private lateinit var viewModel:  HomeViewModel
+    private lateinit var viewModel: HomeViewModel
 
     private lateinit var beginDateLabel: TextView
     private lateinit var endDateLabel: TextView
@@ -62,15 +60,30 @@ class Home : AppCompatActivity() {
             endDateLabel.text = Utils.dateToString(it.time)
         }
 
-        findViewById<Button>(R.id.buttons).setOnClickListener {
+        findViewById<Button>(R.id.button).setOnClickListener {
             // Récupérer données pour la requête
+            // Date de début
+            val begin = viewModel.getBeginDateLiveData().value!!.timeInMillis / 1000
+            // Date de fin
+            val end = viewModel.getEndDateLiveData().value!!.timeInMillis / 1000
             // Airport
             val selectedAirportIndex = airportSpinner.selectedItemPosition
+            val airport = viewModel.getAirportListLiveData().value!![selectedAirportIndex]
+            val icao = airport.icao
             // Depart ou arrivée
             val isArrival = findViewById<Switch>(R.id.airport_switch).isChecked
 
 
-            viewModel.requestFlightsList(isArrival, selectedAirportIndex)
+            // Ouvrir une nouvelle activité avec les infos de la requête
+
+            val intent = Intent(this, FlightListActivity::class.java)
+
+            intent.putExtra("BEGIN",begin)
+            intent.putExtra("END",end)
+            intent.putExtra("IS_ARRIVAL",isArrival)
+            intent.putExtra("ICAO",icao)
+
+            startActivity(intent)
         }
 
 
