@@ -18,7 +18,7 @@
 
 
         <activity
-            android:name=".activiter.InfoMap"
+            android:name=".activiter.Home"
             android:exported="false" />
         <activity
             android:name=".activiter.ListeResult"
@@ -37,7 +37,7 @@
             />
 
         <activity
-            android:name=".activiter.Home"
+            android:name=".activiter.InfoMap"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
