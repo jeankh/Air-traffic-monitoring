@@ -1,0 +1,58 @@
+[
+  {
+    "icao24": "ABCD1234",
+    "firstSeen": 1638357600,
+    "estDepartureAirport": "JFK",
+    "lastSeen": 1638364800,
+    "estArrivalAirport": "LAX",
+    "callsign": "XYZ123",
+    "estDepartureAirportHorizDistance": 100,
+    "estDepartureAirportVertDistance": 50,
+    "estArrivalAirportHorizDistance": 80,
+    "estArrivalAirportVertDistance": 30,
+    "departureAirportCandidatesCount": 3,
+    "arrivalAirportCandidatesCount": 2
+  },
+  {
+    "icao24": "EFGH5678",
+    "firstSeen": 1638358200,
+    "estDepartureAirport": "LHR",
+    "lastSeen": 1638365600,
+    "estArrivalAirport": "CDG",
+    "callsign": "ABC456",
+    "estDepartureAirportHorizDistance": 120,
+    "estDepartureAirportVertDistance": 70,
+    "estArrivalAirportHorizDistance": 90,
+    "estArrivalAirportVertDistance": 40,
+    "departureAirportCandidatesCount": 2,
+    "arrivalAirportCandidatesCount": 1
+  },
+  {
+    "icao24": "WXYZ5678",
+    "firstSeen": 1638357000,
+    "estDepartureAirport": "SFO",
+    "lastSeen": 1638363400,
+    "estArrivalAirport": "ORD",
+    "callsign": "PQR789",
+    "estDepartureAirportHorizDistance": 150,
+    "estDepartureAirportVertDistance": 80,
+    "estArrivalAirportHorizDistance": 70,
+    "estArrivalAirportVertDistance": 50,
+    "departureAirportCandidatesCount": 4,
+    "arrivalAirportCandidatesCount": 3
+  },
+  {
+    "icao24": "LMNO9012",
+    "firstSeen": 1638359200,
+    "estDepartureAirport": "MIA",
+    "lastSeen": 1638366800,
+    "estArrivalAirport": "YYZ",
+    "callsign": "JKL321",
+    "estDepartureAirportHorizDistance": 110,
+    "estDepartureAirportVertDistance": 60,
+    "estArrivalAirportHorizDistance": 85,
+    "estArrivalAirportVertDistance": 45,
+    "departureAirportCandidatesCount": 1,
+    "arrivalAirportCandidatesCount": 2
+  }
+]

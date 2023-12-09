@@ -1,16 +1,20 @@
 package com.example.airtrafficmonitoring
 import android.graphics.Color
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class FlightListAdapter(val flightList: List<FlightModel>, val cellClickListener: OnCellClickListener) :
-    RecyclerView.Adapter<FlightListAdapter.FlightListCellViewHolder>() {
+class FlightListAdapter(
+    private var flightList: List<FlightModel>,
+    private val cellClickListener: OnCellClickListener
+) : RecyclerView.Adapter<FlightListAdapter.FlightListCellViewHolder>() {
 
     interface OnCellClickListener {
         fun onCellClicked(flightModel: FlightModel)
     }
+
 
     class FlightListCellViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -28,7 +32,6 @@ class FlightListAdapter(val flightList: List<FlightModel>, val cellClickListener
 
         val flight = flightList[position]
         val cell = holder.itemView as FlightInfoCell
-        cell.setBackgroundColor(if (position % 2 == 0) Color.YELLOW else Color.GRAY)
         cell.bindData(flight)
         cell.setOnClickListener {
             cellClickListener.onCellClicked(flight)

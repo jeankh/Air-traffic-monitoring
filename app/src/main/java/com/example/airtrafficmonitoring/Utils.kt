@@ -193,5 +193,16 @@ class Utils private constructor() {
                 } else duration.append(minute).append("min").toString()
             }
         }
+        fun convertTimestampToDate(timestamp: Long): Pair<String, String> {
+            val date = Date(timestamp * 1000L)
+
+            val dateFormat = SimpleDateFormat("dd MM yyyy", Locale.getDefault())
+            val dateStr = dateFormat.format(date)
+
+            val timeFormat = SimpleDateFormat("HH:mm")
+            val timeStr = timeFormat.format(date)
+
+            return Pair(dateStr, timeStr)
+        }
     }
 }

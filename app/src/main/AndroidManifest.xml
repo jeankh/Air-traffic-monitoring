@@ -17,9 +17,7 @@
         tools:targetApi="31">
 
 
-        <activity
-            android:name=".activiter.Home"
-            android:exported="false" />
+
         <activity
             android:name=".activiter.ListeResult"
             android:exported="false" />
@@ -38,7 +36,11 @@
 
         <activity
             android:name=".activiter.InfoMap"
-            android:exported="true">
+            android:exported="false"/>
+
+        <activity
+            android:name=".activiter.Home"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
