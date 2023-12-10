@@ -113,7 +113,7 @@ class InfoMap : AppCompatActivity() {
         {
             //sauvegarde pour la rotation
             val sauvegarde = viewModel.parisAirportLiveData.value
-            Log.d("ViewModelmap", sauvegarde.toString())
+            Log.d("ViewModelmap", "internet")
             if (sauvegarde == null) {
                 //coroutine
                 //requete api
@@ -123,9 +123,7 @@ class InfoMap : AppCompatActivity() {
 
                     val url = URL(apiUrl)
                     val connection = url.openConnection() as HttpURLConnection
-                    withContext(Dispatchers.Main) {
-                        progressBar.visibility = View.VISIBLE
-                    }
+
                     connection.requestMethod = "GET"
                     val responseCode = connection.responseCode
                     //reponse a api ok?
@@ -203,6 +201,8 @@ class InfoMap : AppCompatActivity() {
                         }
                     }
                     else {
+                        Log.d("ViewModelmap", "toto")
+
                         withContext(Dispatchers.Main) {
                             progressText.text = "pas de signal"
                         }

@@ -36,4 +36,6 @@ The Air Traffic Monitoring App is designed to provide real-time flight informati
 - Upon launching the app, users can set filters for flight details like departure/arrival, airport, and time range.
 - Click on a specific flight to view detailed information and track its path on the map.
 - For tablets, the app utilizes a split-screen interface to display flight list and map concurrently.
+### Maquettte
 
+![App Logo](app/src/main/image.png)
