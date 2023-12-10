@@ -1,5 +1,6 @@
 package com.example.airtrafficmonitoring.activiter
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -38,15 +39,19 @@ class FlightListActivity : AppCompatActivity() {
         })
 
         if (!isTablet) {
-            viewModel.getClickedFlightLiveData().observe(this, Observer {
-                // Replace the fragment
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_list_container, FlightMapFragment.newInstance("", ""))
-                transaction.addToBackStack(null)
-                transaction.commit()
+            viewModel.getClickedFlightLiveData().observe(this, Observer { flightModel ->
+                // Replace the fragment only if it's not a tablet
+                if (!isTablet) {
+                    val intent = Intent(this, InfoMap::class.java)
+                    startActivity(intent)
+                } else {
+                    // Handle logic for tablet layout here, if needed
+                }
             })
         }
     }
+
+
 
     private fun updateFlightList(flights: List<FlightModel>) {
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)

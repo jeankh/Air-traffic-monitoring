@@ -57,7 +57,6 @@ class FlightListFragment : Fragment(), FlightListAdapter.OnCellClickListener {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             FlightListFragment().apply {
