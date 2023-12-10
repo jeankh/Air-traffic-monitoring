@@ -39,8 +39,14 @@ class FlightListActivity : AppCompatActivity() {
             viewModel.getClickedFlightLiveData().observe(this, Observer { flightModel ->
                 // Replace the fragment only if it's not a tablet
 
-                    val intent = Intent(this, InfoMap::class.java)
-                    startActivity(intent)
+                // Replace the fragment only if it's not a tablet
+                val icao24 = flightModel?.icao24
+                val firstSeen = flightModel?.firstSeen
+
+                val intent = Intent(this, InfoMap::class.java)
+                intent.putExtra("icao24", icao24)
+                intent.putExtra("firstSeen", firstSeen?: 0L)
+                startActivity(intent)
 
             })
 

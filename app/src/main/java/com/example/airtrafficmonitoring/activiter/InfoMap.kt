@@ -36,6 +36,7 @@
     import java.io.InputStreamReader
     import java.net.HttpURLConnection
     import java.net.URL
+    import kotlin.math.log
 
 
     class InfoMap : AppCompatActivity() {
@@ -63,9 +64,12 @@
             // Set the initial map center and zoom level
             mapView.controller.setZoom(5.0)
             mapView.controller.setCenter(GeoPoint(48.8566, 2.3522)) // London coordinates
-            /**
+
              var intent: Intent? = getIntent()
             var numavion = intent!!.getStringExtra("icao24")
+            var firstSeen = intent!!.getStringExtra("firstSeen")
+
+             /**
             var aerodep= intent!!.getStringExtra("estDepartureAirport")
             var aeroariv = intent!!.getStringExtra("estArrivalAirport")
             var timevol = intent!!.getStringExtra("timeAirport")
