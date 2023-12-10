@@ -4,14 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
-import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.airtrafficmonitoring.FlightListAdapter
-import com.example.airtrafficmonitoring.FlightMapFragment
 import com.example.airtrafficmonitoring.FlightModel
 import com.example.airtrafficmonitoring.R
 import com.example.airtrafficmonitoring.ViewModels.FlightListViewModel
@@ -21,7 +18,7 @@ class FlightListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_flight_list)
 
-        val isTablet = findViewById<FragmentContainerView>(R.id.fragment_map_container) != null
+
 
         val begin = intent.getLongExtra("BEGIN", 0)
         val end = intent.getLongExtra("END", 0)
@@ -38,17 +35,15 @@ class FlightListActivity : AppCompatActivity() {
             updateFlightList(flights)
         })
 
-        if (!isTablet) {
+
             viewModel.getClickedFlightLiveData().observe(this, Observer { flightModel ->
                 // Replace the fragment only if it's not a tablet
-                if (!isTablet) {
+
                     val intent = Intent(this, InfoMap::class.java)
                     startActivity(intent)
-                } else {
-                    // Handle logic for tablet layout here, if needed
-                }
+
             })
-        }
+
     }
 
 

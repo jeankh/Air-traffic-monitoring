@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#D6CDCD"
     tools:context=".MainActivity">
+
 
     <Button
         android:id="@+id/button"
@@ -41,25 +44,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/departure_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:text="Departure"
         app:layout_constraintBottom_toBottomOf="@+id/airport_switch"
         app:layout_constraintEnd_toStartOf="@+id/airport_switch"
-        app:layout_constraintTop_toTopOf="@+id/airport_switch" />
+        app:layout_constraintTop_toTopOf="@+id/airport_switch"
+        app:srcCompat="@drawable/baseline_flight_takeoff_24"
+        android:layout_gravity="center_vertical" />
 
-    <TextView
+
+
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/arrival_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Arrival"
         app:layout_constraintBottom_toBottomOf="@+id/airport_switch"
         app:layout_constraintStart_toEndOf="@+id/airport_switch"
-        app:layout_constraintTop_toTopOf="@+id/airport_switch" />
+        app:layout_constraintTop_toTopOf="@+id/airport_switch"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/baseline_flight_land_24" />
 
     <Spinner
         android:id="@+id/airport_spinner"
@@ -77,11 +86,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="Airport"
+        android:text="Choose Airport"
         android:textSize="22sp"
+        android:textColor="#653424"
         app:layout_constraintBottom_toTopOf="@+id/airport_spinner"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/airport_label"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/from_label"
