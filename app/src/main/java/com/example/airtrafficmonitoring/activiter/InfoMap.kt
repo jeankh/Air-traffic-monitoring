@@ -68,19 +68,10 @@ class InfoMap : AppCompatActivity() {
         mapView.controller.setCenter(GeoPoint(48.8566, 2.3522)) // London coordinates
 
         var intent: Intent? = getIntent()
-        var numavion = intent!!.getStringExtra("icao24")
-        var firstSeen = intent!!.getStringExtra("firstSeen")
-        Log.d("ViewModelmapp", firstSeen.toString())
-        /**
-        var aerodep= intent!!.getStringExtra("estDepartureAirport")
-        var aeroariv = intent!!.getStringExtra("estArrivalAirport")
-        var timevol = intent!!.getStringExtra("timeAirport")
-        val parisAirport = OverlayItem("Paris Airport", "Charles de Gaulle Airport", GeoPoint(49.0097, 2.5479))
-        val lyonAirport = OverlayItem("Lyon Airport", "Lyon-Saint Exupéry Airport", GeoPoint(45.7215, 5.0824))
-         **/
-        numavion33 = "4ca76a"
+        numavion33 = intent!!.getStringExtra("icao24").toString()
+        timevol33 = intent!!.getStringExtra("firstSeen").toString()
 
-        timevol33 = "0"
+
         cardView = findViewById(R.id.cardView)
         showDetailsButton = findViewById(R.id.showDetailsButton)
         //cardview
@@ -265,7 +256,7 @@ class InfoMap : AppCompatActivity() {
 
     private fun fetchLatestElement() {
         viewModel.viewModelScope.launch(Dispatchers.IO) {
-            var apiUrl = "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=$timevol33"
+            var apiUrl = "https://opensky-network.org/api/tracks/all?icao24=$numavion33&time=0"
 
             val url = URL(apiUrl)
             val connection = url.openConnection() as HttpURLConnection
