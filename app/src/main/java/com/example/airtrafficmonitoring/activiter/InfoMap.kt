@@ -1,5 +1,6 @@
 package com.example.airtrafficmonitoring.activiter
 
+
 import InfoMapViewModel
 import android.annotation.SuppressLint
 import android.content.Context
@@ -56,6 +57,7 @@ class InfoMap : AppCompatActivity() {
         setContentView(R.layout.activity_info_map)
         viewModel = ViewModelProvider(this).get(InfoMapViewModel::class.java)
 
+
         // Configure OSMdroid
         Configuration.getInstance().load(this, getSharedPreferences("osmdata", 0))
         mapView = findViewById(R.id.mapView)
@@ -68,7 +70,7 @@ class InfoMap : AppCompatActivity() {
         var intent: Intent? = getIntent()
         var numavion = intent!!.getStringExtra("icao24")
         var firstSeen = intent!!.getStringExtra("firstSeen")
-
+        Log.d("ViewModelmapp", firstSeen.toString())
         /**
         var aerodep= intent!!.getStringExtra("estDepartureAirport")
         var aeroariv = intent!!.getStringExtra("estArrivalAirport")
